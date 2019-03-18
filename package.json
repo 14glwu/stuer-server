@@ -5,7 +5,10 @@
   "private": true,
   "dependencies": {
     "egg": "^2.2.1",
-    "egg-scripts": "^2.5.0"
+    "egg-scripts": "^2.5.0",
+    "egg-sequelize": "^4.3.1",
+    "egg-validate": "^2.0.2",
+    "mysql2": "^1.6.5"
   },
   "devDependencies": {
     "autod": "^3.0.1",

@@ -21,6 +21,6 @@ module.exports = app => {
       underscored: false,
     }
   );
-  Company.sync({ alter: true });
+  Company.sync();
   return Company;
 };

@@ -23,6 +23,6 @@ module.exports = app => {
       underscored: false,
     }
   );
-  Like.sync({ alter: true });
+  Like.sync();
   return Like;
 };

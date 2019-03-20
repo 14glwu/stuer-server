@@ -21,6 +21,6 @@ module.exports = app => {
       underscored: false,
     }
   );
-  Major.sync({ alter: true });
+  Major.sync();
   return Major;
 };

@@ -28,6 +28,6 @@ module.exports = app => {
     app.model.Oa.belongsTo(app.model.User, { foreignKey: 'userId' });
     app.model.Oa.belongsTo(app.model.Academy, { foreignKey: 'academyId' });
   };
-  Oa.sync({ alter: true });
+  Oa.sync();
   return Oa;
 };

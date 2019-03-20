@@ -27,6 +27,6 @@ module.exports = app => {
   Post.associate = function() {
     app.model.Post.belongsTo(app.model.User, { foreignKey: 'userId' });
   };
-  Post.sync({ alter: true });
+  Post.sync();
   return Post;
 };

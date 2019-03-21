@@ -21,5 +21,26 @@ module.exports = appInfo => {
     password: '1234',
   };
 
+  config.security = {
+    csrf: false,
+  };
+
+  config.errors = {
+    USER_EXIST_ERROR: {
+      // 用户已存在
+      code: 1000,
+      name: 'USER_EXIST_ERROR',
+    },
+    USER_NOT_FOUND_ERROR: {
+      // 用户已存在
+      code: 1001,
+      name: 'USER_NOT_FOUND_ERROR',
+    },
+    PASSWORD_ERROR: {
+      // 用户密码错误
+      code: 1002,
+      name: 'PASSWORD_ERROR',
+    },
+  };
   return config;
 };

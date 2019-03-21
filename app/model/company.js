@@ -9,6 +9,8 @@ module.exports = app => {
       id: { type: INTEGER, primaryKey: true, autoIncrement: true },
       name: { type: STRING(30), comment: '公司名' },
       info: { type: STRING, comment: '公司介绍' },
+      regNum: { type: STRING, comment: '公司经营注册号' },
+      address: { type: STRING, comment: '公司地址' },
       reverse1: STRING,
       reverse2: STRING(1000),
       reverse3: STRING(30),

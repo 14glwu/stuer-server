@@ -3,30 +3,35 @@
 const Service = require('egg').Service;
 
 class Users extends Service {
-  async create(User) {
+  async create(user) {
     const { ctx, app } = this;
-    const [ user, isNew ] = await ctx.model.User.findOrCreate({
+    const [ userInstance, isNew ] = await ctx.model.User.findOrCreate({
       where: {
-        email: User.email,
+        email: user.email,
       },
-      defaults: User,
+      defaults: user,
     });
     if (!isNew) {
-      const { USER_EXIST_ERROR } = app.config.errors;
+      const { USER_EXIST } = app.config.errors;
       const err = new Error();
-      Object.assign(err, USER_EXIST_ERROR);
+      Object.assign(err, USER_EXIST);
       throw err;
     }
-    return user;
+    return userInstance;
   }
-  async find(email) {
+  async findOne(email) {
     const { ctx } = this;
-    const user = await ctx.model.User.find({
+    const userInstance = await ctx.model.User.findOne({
       where: {
         email,
       },
     });
-    return user;
+    return userInstance;
+  }
+  async findById(id) {
+    const { ctx } = this;
+    const userInstance = await ctx.model.User.findById(id);
+    return userInstance;
   }
 }
 

@@ -5,7 +5,9 @@ const Controller = require('egg').Controller;
 class HomeController extends Controller {
   async index() {
     const { ctx } = this;
-    ctx.helper.$success('hi, egg');
+    const html = await ctx.helper.readHtml('index.html');
+    ctx.set('Content-Type', 'text/html');
+    ctx.body = html;
   }
 }
 

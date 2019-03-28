@@ -6,17 +6,30 @@ class UserInfos extends Service {
   // 创建或更新用户信息
   async createOrUpdate(userInfo) {
     const { ctx } = this;
-    const [ userInfoRecord, isNew ] = await ctx.model.UserInfo.findOrCreate({
+    const [ userInfoInstance, isNew ] = await ctx.model.UserInfo.findOrCreate({
       where: {
         id: userInfo.id,
-        email: userInfo.email,
       },
       defaults: userInfo,
     });
     if (!isNew) {
       await ctx.model.UserInfo.update(userInfo);
     }
-    return userInfoRecord;
+    return userInfoInstance;
+  }
+  async findOne(email) {
+    const { ctx } = this;
+    const userInstance = await ctx.model.User.findOne({
+      where: {
+        email,
+      },
+    });
+    return userInstance;
+  }
+  async findById(id) {
+    const { ctx } = this;
+    const userInstance = await ctx.model.UserInfo.findById(id);
+    return userInstance;
   }
 }
 

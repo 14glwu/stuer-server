@@ -8,7 +8,9 @@
     "egg-scripts": "^2.5.0",
     "egg-sequelize": "^4.3.1",
     "egg-validate": "^2.0.2",
-    "mysql2": "^1.6.5"
+    "jsonwebtoken": "^8.5.1",
+    "mysql2": "^1.6.5",
+    "nodemailer": "^5.1.1"
   },
   "devDependencies": {
     "autod": "^3.0.1",
@@ -16,6 +18,7 @@
     "egg-bin": "^4.3.5",
     "egg-ci": "^1.8.0",
     "egg-mock": "^3.14.0",
+    "egg-redis": "^2.3.0",
     "eslint": "^4.11.0",
     "eslint-config-egg": "^6.0.0",
     "webstorm-disable-index": "^1.2.0"

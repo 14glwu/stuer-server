@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["job"],{def9:function(n,e,t){"use strict";t.r(e);var o=function(){var n=this,e=n.$createElement,t=n._self._c||e;return t("div",[n._v("this is job")])},a=[],s={data:function(){return{}},components:{}},c=s,i=t("2877"),r=Object(i["a"])(c,o,a,!1,null,"6abf9e1a",null);e["default"]=r.exports}}]);
+//# sourceMappingURL=job.cafe90ff.js.map

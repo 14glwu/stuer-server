@@ -7,7 +7,7 @@ module.exports = app => {
     {
       id: { type: INTEGER, primaryKey: true, autoIncrement: true },
       userId: { type: INTEGER, comment: '用户id' },
-      title: { type: INTEGER, comment: '帖子标题' },
+      title: { type: STRING, comment: '帖子标题' },
       content: { type: TEXT, comment: '帖子内容' },
       top: { type: INTEGER, comment: '是否置顶，1是，0否' },
       highlight: { type: INTEGER, comment: '是否精华帖，1是，0否' },

@@ -17,19 +17,57 @@ class UserInfos extends Service {
     }
     return userInfoInstance;
   }
+  // 查找用户信息
   async findOne(email) {
     const { ctx } = this;
-    const userInstance = await ctx.model.User.findOne({
+    const userInfoInstance = await ctx.model.UserInfo.findOne({
       where: {
         email,
       },
     });
-    return userInstance;
+    return userInfoInstance;
   }
+  // 查找用户信息通过id
   async findById(id) {
     const { ctx } = this;
-    const userInstance = await ctx.model.UserInfo.findById(id);
-    return userInstance;
+    const userInfoInstance = await ctx.model.UserInfo.findById(id);
+    return userInfoInstance;
+  }
+  // 获取所有学生信息
+  async getAllStudents() {
+    const { ctx, app } = this;
+    const Op = app.Sequelize.Op;
+    const query = {
+      where: {
+        role: {
+          [Op.or]: [ 1, 2 ],
+        },
+      },
+    };
+    const result = await ctx.model.UserInfo.findAll(query);
+    return result;
+  }
+  // 获取所有在校生信息
+  async getAllStudentsAtSchool() {
+    const { ctx } = this;
+    const query = {
+      where: {
+        role: 2,
+      },
+    };
+    const result = await ctx.model.UserInfo.findAll(query);
+    return result;
+  }
+  // 获取所有毕业生信息
+  async getAllGraduates() {
+    const { ctx } = this;
+    const query = {
+      where: {
+        role: 1,
+      },
+    };
+    const result = await ctx.model.UserInfo.findAll(query);
+    return result;
   }
 }
 

@@ -14,8 +14,16 @@ module.exports = app => {
   router.post('/api/updatePwd', 'api.users.updatePwd'); // 更新密码
   router.post('/api/validateCode', 'api.users.validateCodeInPwd'); // 更新密码前验证验证码
   router.post('/api/sendCode', 'api.users.sendCode'); // 发送验证码
+
   router.get('/api/loginStatus', auth_token_check, 'api.users.loginStatus'); // 获取登录状态
 
-  router.resources('/api/userInfos', auth_token_check, 'api.userInfos');
+  // 用户信息相关
+  router.get('/api/getUserInfo', auth_token_check, 'api.userInfos.getUserInfo');
+  router.get('/api/getAllStudents', auth_token_check, 'api.userInfos.getAllStudents');
+  router.get('/api/getAllStudentsAtSchool', auth_token_check, 'api.userInfos.getAllStudentsAtSchool');
+  router.get('/api/getAllGraduates', auth_token_check, 'api.userInfos.getAllGraduates');
+  router.post('/api/updateUserInfo', auth_token_check, 'api.userInfos.updateUserInfo');
+  router.post('/api/certifyUser', auth_token_check, 'api.userInfos.certifyUser');
+
   router.resources('/api/posts', auth_token_check, 'api.posts');
 };

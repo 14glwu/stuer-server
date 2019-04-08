@@ -100,7 +100,8 @@ class Users extends Controller {
       id: userInstance.id,
       email: userInstance.email,
       role: 1,
-      roleName: '校友',
+      roleName: '毕业生',
+      graduated: 1,
     };
     const userInfoInstance = await ctx.service.userInfos.createOrUpdate(userInfo);
     ctx.helper.$success(userInfoInstance);

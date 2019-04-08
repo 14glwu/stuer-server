@@ -31,6 +31,28 @@ module.exports = appInfo => {
   // 用来摘要密码的秘钥
   config.pwdSecrect = 'thisisapwdsecrect';
 
+  config.redis = {
+    client: {
+      port: 6379, // Redis port
+      host: '127.0.0.1', // Redis host
+      password: 'admin',
+      db: 0,
+    },
+  };
+
+  config.email = {
+    options: {
+      host: 'smtp.qq.com',
+      port: 465,
+      secure: true, // true for 465, false for other ports
+      auth: {
+        user: '769835910@qq.com',
+        pass: 'relmlrhbizznbcif', // generated ethereal password
+      },
+    },
+    from: '"Stuer官方" <769835910@qq.com>',
+  };
+
   config.errors = {
     INVALID_PARAM: {
       // 非法参数
@@ -43,6 +65,12 @@ module.exports = appInfo => {
       code: 1001,
       name: 'INVALID_PARAM',
       msg: 'auth_token校验失败',
+    },
+    NO_RIGHTS_OPERATION: {
+      // 您无权进行此操作
+      code: 1001,
+      name: 'NO_RIGHTS_OPERATION',
+      msg: '您无权进行此操作',
     },
     HAS_LOGIN: {
       // 用户账号已登录
@@ -63,7 +91,7 @@ module.exports = appInfo => {
       msg: '用户已存在',
     },
     USER_NOT_FOUND: {
-      // 用户已存在
+      // 用户不存在
       code: 2003,
       name: 'USER_NOT_FOUND',
       msg: '用户不存在',
@@ -92,28 +120,13 @@ module.exports = appInfo => {
       name: 'TICKET_IS_USED',
       msg: '凭证已使用',
     },
-  };
-
-  config.redis = {
-    client: {
-      port: 6379, // Redis port
-      host: '127.0.0.1', // Redis host
-      password: 'admin',
-      db: 0,
+    POST_NOT_FOUND: {
+      // 帖子存在
+      code: 2008,
+      name: 'POST_NOT_FOUND',
+      msg: '帖子不存在',
     },
   };
 
-  config.email = {
-    options: {
-      host: 'smtp.qq.com',
-      port: 465,
-      secure: true, // true for 465, false for other ports
-      auth: {
-        user: '769835910@qq.com',
-        pass: 'relmlrhbizznbcif', // generated ethereal password
-      },
-    },
-    from: '"Stuer官方" <769835910@qq.com>',
-  };
   return config;
 };

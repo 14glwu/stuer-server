@@ -10,9 +10,8 @@ module.exports = app => {
       email: { type: STRING, comment: '邮箱账号' },
       role: {
         type: INTEGER,
-        comment: '用户角色ID，1在校生，2校友，3教师，4社区运营，5运营管理员，6学校管理员，7企业管理员，8超级管理员',
+        comment: '用户角色ID，1毕业生，2在校生，3教师，4运营管理员，5学校管理员，6企业管理员，7超级管理员',
       },
-      roleName: { type: STRING, comment: '用户角色名' },
       name: { type: STRING, comment: '用户真实姓名' },
       nickName: { type: STRING, comment: '用户昵称' },
       personSign: { type: STRING, comment: '个性签名' },
@@ -59,6 +58,6 @@ module.exports = app => {
   UserInfo.associate = function() {
     app.model.UserInfo.belongsTo(app.model.User, { as: 'info', foreignKey: 'id' });
   };
-  UserInfo.sync();
+  UserInfo.sync({ alter: true });
   return UserInfo;
 };

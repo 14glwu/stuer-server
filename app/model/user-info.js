@@ -58,6 +58,6 @@ module.exports = app => {
   UserInfo.associate = function() {
     app.model.UserInfo.belongsTo(app.model.User, { as: 'info', foreignKey: 'id' });
   };
-  UserInfo.sync({ alter: true });
+  UserInfo.sync();
   return UserInfo;
 };

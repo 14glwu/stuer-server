@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["profile-basicInfo"],{ac4c:function(n,e,t){"use strict";t.r(e);var c=function(){var n=this,e=n.$createElement,t=n._self._c||e;return t("div",[n._v("这是basicInfo")])},a=[],o={data:function(){return{}},methods:{}},i=o,r=t("2877"),s=Object(r["a"])(i,c,a,!1,null,"3d709d8e",null);e["default"]=s.exports}}]);
+//# sourceMappingURL=profile-basicInfo.dcf1c48c.js.map

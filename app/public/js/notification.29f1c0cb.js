@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["notification"],{bafd:function(n,t,i){"use strict";i.r(t);var e=function(){var n=this,t=n.$createElement,i=n._self._c||t;return i("div",[n._v("this is notification")])},o=[],a={data:function(){return{}},components:{}},c=a,s=i("2877"),r=Object(s["a"])(c,e,o,!1,null,"3f600116",null);t["default"]=r.exports}}]);
+//# sourceMappingURL=notification.29f1c0cb.js.map

@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["oa"],{8560:function(n,t,e){"use strict";e.r(t);var o=function(){var n=this,t=n.$createElement,e=n._self._c||t;return e("div",[n._v("this is oa")])},a=[],s={data:function(){return{}},components:{}},c=s,i=e("2877"),r=Object(i["a"])(c,o,a,!1,null,"65027d94",null);t["default"]=r.exports}}]);
+//# sourceMappingURL=oa.a64b944a.js.map

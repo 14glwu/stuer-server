@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["profile-home"],{"937f":function(e,n,t){"use strict";t.r(n);var o=function(){var e=this,n=e.$createElement,t=e._self._c||n;return t("div",[e._v("这是home")])},r=[],u={data:function(){return{}},methods:{}},a=u,c=t("2877"),i=Object(c["a"])(a,o,r,!1,null,"0d7d8799",null);n["default"]=i.exports}}]);
+//# sourceMappingURL=profile-home.92cac2cd.js.map

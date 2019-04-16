@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["profile-discuss"],{d49f:function(e,n,s){"use strict";s.r(n);var t=function(){var e=this,n=e.$createElement,s=e._self._c||n;return s("div",[e._v("这是discuss")])},u=[],c={data:function(){return{}},methods:{}},i=c,r=s("2877"),a=Object(r["a"])(i,t,u,!1,null,"93160a92",null);n["default"]=a.exports}}]);
+//# sourceMappingURL=profile-discuss.cd40de3d.js.map

@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["discuss"],{"416a":function(n,s,t){"use strict";t.r(s);var e=function(){var n=this,s=n.$createElement,t=n._self._c||s;return t("div",[n._v("this is discuss")])},a=[],c={data:function(){return{}},components:{}},i=c,u=t("2877"),o=Object(u["a"])(i,e,a,!1,null,"75ddba8a",null);s["default"]=o.exports}}]);
+//# sourceMappingURL=discuss.6ccc1381.js.map

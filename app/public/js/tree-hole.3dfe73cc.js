@@ -1,2 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["tree-hole"],{"0db6":function(e,t,n){"use strict";n.r(t);var o=function(){var e=this,t=e.$createElement,n=e._self._c||t;return n("div",[e._v("this is tree-hole")])},r=[],c={data:function(){return{}},components:{}},s=c,a=n("2877"),i=Object(a["a"])(s,o,r,!1,null,"fca04062",null);t["default"]=i.exports}}]);
-//# sourceMappingURL=tree-hole.3dfe73cc.js.map

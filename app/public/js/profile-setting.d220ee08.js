@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["profile-setting"],{"82f0":function(t,e,n){"use strict";n.r(e);var i=function(){var t=this,e=t.$createElement,n=t._self._c||e;return n("div",[t._v("这是setting")])},r=[],s={data:function(){return{}},methods:{}},c=s,o=n("2877"),u=Object(o["a"])(c,i,r,!1,null,"41fd0c52",null);e["default"]=u.exports}}]);
+//# sourceMappingURL=profile-setting.d220ee08.js.map

@@ -14,6 +14,17 @@ class UserInfos extends Controller {
     }
     ctx.helper.$success(userInfoInstance);
   }
+  async getUserInfoById() {
+    const { ctx } = this;
+    const id = ctx.helper.toInt(ctx.params.id);
+    const userInfoInstance = await ctx.service.userInfos.findById(id);
+    if (!userInfoInstance) {
+      const { USER_NOT_FOUND } = this.config.errors;
+      ctx.helper.$fail(USER_NOT_FOUND.code, USER_NOT_FOUND.msg);
+      return;
+    }
+    ctx.helper.$success(userInfoInstance);
+  }
   // 获取所有学生信息
   async getAllStudents() {
     const { ctx } = this;

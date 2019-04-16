@@ -12,12 +12,12 @@ module.exports = () => {
           msg: 'NOT FOUND',
         };
       } else if (/^\/sso.*/.test(url)) {
-        // 单点登录平台
+        // 返回单点登录平台页面
         const html = await ctx.helper.readHtml('sso.html');
         ctx.set('Content-Type', 'text/html');
         ctx.body = html;
       } else {
-        // stuer平台
+        // 返回stuer平台页面
         const html = await ctx.helper.readHtml('index.html');
         ctx.set('Content-Type', 'text/html');
         ctx.body = html;

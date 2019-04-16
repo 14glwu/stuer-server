@@ -18,6 +18,7 @@ module.exports = app => {
   router.get('/api/loginStatus', auth_token_check, 'api.users.loginStatus'); // 获取登录状态
 
   // 用户信息相关
+  router.get('/api/user/:id', 'api.userInfos.getUserInfoById');
   router.get('/api/getUserInfo', auth_token_check, 'api.userInfos.getUserInfo');
   router.get('/api/getAllStudents', auth_token_check, 'api.userInfos.getAllStudents');
   router.get('/api/getAllStudentsAtSchool', auth_token_check, 'api.userInfos.getAllStudentsAtSchool');

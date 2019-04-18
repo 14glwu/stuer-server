@@ -9,6 +9,7 @@ module.exports = app => {
       id: { type: INTEGER, primaryKey: true, autoIncrement: true },
       name: { type: STRING(30), comment: '专业名' },
       info: { type: STRING, comment: '专业介绍' },
+      academyId: { type: INTEGER, comment: '学院ID' },
       reverse1: STRING,
       reverse2: STRING(1000),
       reverse3: STRING(30),
@@ -21,6 +22,10 @@ module.exports = app => {
       underscored: false,
     }
   );
-  Major.sync();
+  Major.associate = function() {
+    app.model.Major.belongsTo(app.model.Academy);
+  };
+
+  Major.sync({ alter: true });
   return Major;
 };

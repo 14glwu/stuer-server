@@ -26,5 +26,6 @@ module.exports = app => {
   router.post('/api/updateUserInfo', auth_token_check, 'api.userInfos.updateUserInfo');
   router.post('/api/certifyUser', auth_token_check, 'api.userInfos.certifyUser');
 
+  router.get('/api/getAllMajors', 'api.majors.getAllMajors');
   router.resources('/api/posts', auth_token_check, 'api.posts');
 };

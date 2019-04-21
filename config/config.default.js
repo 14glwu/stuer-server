@@ -12,8 +12,8 @@ module.exports = appInfo => {
     match: '/api',
   };
 
-  // 登录token的有效期
-  config.loginTokenTime = 24 * 60 * 60;
+  // 登录token的有效期,设置为三天
+  config.loginTokenTime = 3 * 24 * 60 * 60;
 
   config.sequelize = {
     dialect: 'mysql',
@@ -38,6 +38,10 @@ module.exports = appInfo => {
       password: 'admin',
       db: 0,
     },
+  };
+
+  config.sso = {
+    domain: 'localhost',
   };
 
   config.email = {

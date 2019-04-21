@@ -3,6 +3,10 @@
 module.exports = appInfo => {
   const config = (exports = {});
 
+  config.sso = {
+    domain: 'ericwu.cn',
+  };
+
   config.sequelize = {
     dialect: 'mysql',
     host: '127.0.0.1',

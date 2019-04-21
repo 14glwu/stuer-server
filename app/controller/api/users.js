@@ -49,7 +49,7 @@ class Users extends Controller {
       ctx.cookies.set('auth_token', auth_token, {
         maxAge: this.config.loginTokenTime * 1000,
         path: '/',
-        domain: 'localhost',
+        domain: app.config.sso.domain,
         httpOnly: false,
         signed: false,
       });

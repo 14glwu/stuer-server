@@ -7,6 +7,10 @@ module.exports = appInfo => {
     domain: 'ericwu.cn',
   };
 
+  config.urls = {
+    stuer_url: 'http://stuer.ericwu.cn',
+  };
+
   config.sequelize = {
     dialect: 'mysql',
     host: '127.0.0.1',

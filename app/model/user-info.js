@@ -17,7 +17,7 @@ module.exports = app => {
       personSign: { type: STRING, comment: '个性签名' },
       avatar: { type: STRING, comment: '用户头像url' },
       age: { type: INTEGER, comment: '年龄' },
-      gender: { type: STRING(10), comment: '性别' },
+      gender: { type: INTEGER, comment: '性别' },
       phone: { type: STRING(20), comment: '联系方式' },
       birthTime: { type: DATE, comment: '生日' },
       birthPlace: { type: STRING, comment: '籍贯' },

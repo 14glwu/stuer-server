@@ -53,7 +53,12 @@ class UserInfos extends Controller {
       return;
     }
     const { id, email, role, certifyType } = ctx.request.body; // 这几项是不允许随意修改的
-    if (id || email || role > 4 || certifyType) {
+    if (
+      (id && id !== userInfoInstance.id) ||
+      (email && email !== userInfoInstance.email) ||
+      (role && role > 4) ||
+      certifyType
+    ) {
       const { NO_RIGHTS_OPERATION } = this.config.errors;
       ctx.helper.$fail(NO_RIGHTS_OPERATION.code, NO_RIGHTS_OPERATION.msg);
       return;

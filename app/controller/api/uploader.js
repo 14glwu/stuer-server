@@ -9,7 +9,7 @@ const awaitWriteStream = require('await-stream-ready').write;
 
 class Uploader extends Controller {
   async uploadImg() {
-    const ctx = this.ctx;
+    const { ctx, config } = this;
     let uploadStream;
     try {
       uploadStream = await ctx.getFileStream();
@@ -26,7 +26,7 @@ class Uploader extends Controller {
     // path.extname(uploadStream.filename).toLocaleLowerCase可以获取到文件后缀名，比如.jpg .png
     const filename = nameid + path.extname(uploadStream.filename).toLocaleLowerCase();
     // 文件存在 upload/img 文件夹下
-    const target = path.join(this.config.baseDir, 'upload/img', filename);
+    const target = path.join(config.baseDir, 'upload/img', filename);
     // 生成一个文件写入 文件流
     const writeStream = fs.createWriteStream(target);
     try {
@@ -38,11 +38,11 @@ class Uploader extends Controller {
     }
 
     ctx.helper.$success({
-      filename: '/upload/img/' + filename,
+      fileUrl: `${config.urls.stuer_url}/upload/img/${filename}`,
     });
   }
   async uploadImgs() {
-    const { ctx } = this;
+    const { ctx, config } = this;
     const parts = ctx.multipart();
     let part;
     const result = [];
@@ -61,9 +61,8 @@ class Uploader extends Controller {
         const nameid = ctx.helper.uuid().replace(/-/g, '');
         // path.extname(part.filename).toLocaleLowerCase可以获取到文件后缀名，比如.jpg .png
         const filename = nameid + path.extname(part.filename).toLocaleLowerCase();
-        console.log('filename:' + filename);
         // 文件存在 upload/img 文件夹下
-        const target = path.join(this.config.baseDir, 'upload/img', filename);
+        const target = path.join(config.baseDir, 'upload/img', filename);
         // 生成一个文件写入 文件流
         const writeStream = fs.createWriteStream(target);
         try {
@@ -73,7 +72,7 @@ class Uploader extends Controller {
           await sendToWormhole(part);
           throw err;
         }
-        result.push(`/upload/img/${filename}`);
+        result.push(`${config.urls.stuer_url}/upload/img/${filename}`);
       }
     }
     ctx.helper.$success(result);

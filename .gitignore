@@ -10,3 +10,4 @@ run/
 *.sw*
 *.un~
 upload/img/*
+!.gitkeep

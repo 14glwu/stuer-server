@@ -2,7 +2,6 @@
 const path = require('path');
 
 module.exports = appInfo => {
-  console.log(appInfo.baseDir);
   const config = (exports = {});
 
   // use for cookie sign key, should change to your own and keep security
@@ -14,8 +13,8 @@ module.exports = appInfo => {
     match: '/api',
   };
 
-  // 登录token的有效期,设置为三天
-  config.loginTokenTime = 3 * 24 * 60 * 60;
+  // 登录token的有效期,设置为一周
+  config.loginTokenTime = 7 * 24 * 60 * 60;
 
   config.sequelize = {
     dialect: 'mysql',
@@ -51,6 +50,10 @@ module.exports = appInfo => {
 
   config.sso = {
     domain: 'localhost',
+  };
+
+  config.urls = {
+    stuer_url: 'http://localhost:7001',
   };
 
   config.email = {

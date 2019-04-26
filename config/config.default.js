@@ -1,6 +1,8 @@
 'use strict';
+const path = require('path');
 
 module.exports = appInfo => {
+  console.log(appInfo.baseDir);
   const config = (exports = {});
 
   // use for cookie sign key, should change to your own and keep security
@@ -26,6 +28,13 @@ module.exports = appInfo => {
 
   config.security = {
     csrf: false,
+  };
+
+  exports.static = {
+    dir: [
+      { dir: path.join(appInfo.baseDir, 'app/public'), prefix: '/public/' },
+      { dir: path.join(appInfo.baseDir, 'upload'), prefix: '/upload/' },
+    ], // 多静态文件入口
   };
 
   // 用来摘要密码的秘钥

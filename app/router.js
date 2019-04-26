@@ -29,4 +29,6 @@ module.exports = app => {
   router.get('/api/getAllMajors', 'api.majors.getAllMajors');
   router.resources('/api/companies', 'api.companies');
   router.resources('/api/posts', auth_token_check, 'api.posts');
+  router.post('/api/uploadImg', 'api.uploader.uploadImg');
+  router.post('/api/uploadImgs', 'api.uploader.uploadImgs');
 };

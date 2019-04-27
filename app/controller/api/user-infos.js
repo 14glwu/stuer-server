@@ -63,12 +63,12 @@ class UserInfos extends Controller {
       ctx.helper.$fail(NO_RIGHTS_OPERATION.code, NO_RIGHTS_OPERATION.msg);
       return;
     }
-    const { graduated } = ctx.request.body;
-    if (graduated === 0) {
-      Object.assign(ctx.request.body, {
-        role: 2, // 在校生
-      });
-    }
+    // const { graduated } = ctx.request.body;
+    // if (graduated === 0) {
+    //   Object.assign(ctx.request.body, {
+    //     role: 2, // 在校生
+    //   });
+    // }
     await userInfoInstance.update(ctx.request.body);
     ctx.helper.$success(userInfoInstance);
   }

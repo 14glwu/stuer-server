@@ -25,6 +25,7 @@ const rule = {
   },
 };
 class Users extends Controller {
+  // 登录
   async login() {
     const { ctx, app } = this;
     ctx.validate(
@@ -44,8 +45,10 @@ class Users extends Controller {
       return;
     }
     if (userInstance.password === pwdHash) {
-      // 生成授权token
+      // 登录成功
+      // 生成auth_token
       const auth_token = ctx.helper.generateToken({ email: userInstance.email }, this.config.loginTokenTime);
+      // 将auth_token设置到Cookie中
       ctx.cookies.set('auth_token', auth_token, {
         maxAge: this.config.loginTokenTime * 1000,
         path: '/',
@@ -53,12 +56,14 @@ class Users extends Controller {
         httpOnly: false,
         signed: false,
       });
+      // 将auth_token存入Redis中，获取的键为用户账号email,并设置一定的有效期
       await app.redis.setex(userInstance.email, this.config.loginTokenTime, auth_token);
       ctx.helper.$success({
         auth_token,
         expires: this.config.loginTokenTime,
       });
     } else {
+      // 登录失败
       const { PASSWORD_ERROR } = this.config.errors;
       ctx.helper.$fail(PASSWORD_ERROR.code, PASSWORD_ERROR.code.msg);
       return;

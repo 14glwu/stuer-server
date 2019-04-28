@@ -31,8 +31,8 @@ module.exports = appInfo => {
 
   exports.static = {
     dir: [
-      { dir: path.join(appInfo.baseDir, 'app/public'), prefix: '/public/' },
-      { dir: path.join(appInfo.baseDir, 'upload'), prefix: '/upload/' },
+      { dir: path.join(appInfo.baseDir, 'app/public'), prefix: '/public/' }, // 前端项目构建目录
+      { dir: path.join(appInfo.baseDir, 'upload'), prefix: '/upload/' }, // 用户上传图片目录
     ], // 多静态文件入口
   };
 

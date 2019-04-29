@@ -6,26 +6,9 @@ class Posts extends Controller {
   // 获取总的帖子
   async index() {
     const { ctx } = this;
-    ctx.validate(
-      {
-        pageIndex: {
-          type: 'number',
-          required: false,
-          min: 1,
-        },
-        pageSize: {
-          type: 'number',
-          required: false,
-          min: 0,
-        },
-        type: {
-          type: 'enum',
-          values: [ 1, 2, 3, 4 ],
-        },
-      },
-      ctx.request.body
-    );
-    const { pageIndex, pageSize, type } = ctx.query;
+    // 请求参数校验
+    let { pageIndex, pageSize, type } = ctx.query;
+    [ pageIndex, pageSize, type ] = [ pageIndex, pageSize, type ].map(item => parseInt(item, 10));
     // 先查询置顶帖子
     const { count: topCount, rows: topPosts } = await ctx.service.posts.getTopPost({ type });
     let result = {
@@ -43,6 +26,12 @@ class Posts extends Controller {
     // 汇总数据
     const count = topCount + notTopCount;
     const posts = [].concat(topPosts, notTopPosts);
+    await Promise.all(
+      posts.map(async post => {
+        const userInfo = await ctx.service.userInfos.findByIdInRaw(post.userId);
+        post.setDataValue('userInfo', userInfo);
+      })
+    );
     ctx.helper.$success({ count, posts });
   }
 

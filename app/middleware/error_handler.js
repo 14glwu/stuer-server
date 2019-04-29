@@ -5,6 +5,7 @@ module.exports = () => {
     try {
       await next();
     } catch (err) {
+      console.log(err);
       const { errors } = ctx.app.config;
       const status = err.status || 200;
       if (err.code === 'invalid_param') {

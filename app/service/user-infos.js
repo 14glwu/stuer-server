@@ -33,6 +33,12 @@ class UserInfos extends Service {
     const userInfoInstance = await ctx.model.UserInfo.findById(id);
     return userInfoInstance;
   }
+  // 查找用户信息通过id, 返回的是原始对象，不是实例
+  async findByIdInRaw(id) {
+    const { ctx } = this;
+    const userInfoRaw = await ctx.model.UserInfo.findById(id, { raw: true });
+    return userInfoRaw;
+  }
   // 获取所有学生信息
   async getAllStudents() {
     const { ctx, app } = this;

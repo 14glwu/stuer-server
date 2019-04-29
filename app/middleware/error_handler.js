@@ -7,7 +7,7 @@ module.exports = () => {
     } catch (err) {
       console.log(err);
       const { errors } = ctx.app.config;
-      const status = err.status || 200;
+      const status = err.status === 500 ? 500 : 200;
       if (err.code === 'invalid_param') {
         err.name = errors.INVALID_PARAM.name;
         err.code = errors.INVALID_PARAM.code;

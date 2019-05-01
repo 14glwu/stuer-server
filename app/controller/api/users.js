@@ -47,7 +47,10 @@ class Users extends Controller {
     if (userInstance.password === pwdHash) {
       // 登录成功
       // 生成auth_token
-      const auth_token = ctx.helper.generateToken({ email: userInstance.email }, this.config.loginTokenTime);
+      const auth_token = ctx.helper.generateToken(
+        { email: userInstance.email },
+        this.config.loginTokenTime
+      );
       // 将auth_token设置到Cookie中
       ctx.cookies.set('auth_token', auth_token, {
         maxAge: this.config.loginTokenTime * 1000,
@@ -69,6 +72,15 @@ class Users extends Controller {
       return;
     }
   }
+
+  // 退出登录
+  async logout() {
+    const { ctx, app } = this;
+    // 删除email对应的auth_token
+    await app.redis.del(ctx.user_email);
+    ctx.helper.$success();
+  }
+
   // 获取用户登录状态，经过中间件auth_token_check判断
   async loginStatus() {
     const { ctx } = this;

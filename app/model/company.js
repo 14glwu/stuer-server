@@ -11,6 +11,7 @@ module.exports = app => {
       info: { type: STRING, comment: '公司介绍' },
       regNum: { type: STRING, comment: '公司经营注册号' },
       address: { type: STRING, comment: '公司地址' },
+      property: { type: STRING, comment: '企业性质' },
       reverse1: STRING,
       reverse2: STRING(1000),
       reverse3: STRING(30),
@@ -23,6 +24,6 @@ module.exports = app => {
       underscored: false,
     }
   );
-  Company.sync();
+  Company.sync({ alter: true });
   return Company;
 };

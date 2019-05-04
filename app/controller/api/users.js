@@ -117,7 +117,6 @@ class Users extends Controller {
       id: userInstance.id,
       email: userInstance.email,
       role: 1,
-      roleName: '毕业生',
       graduated: 1,
     };
     const userInfoInstance = await ctx.service.userInfos.createOrUpdate(userInfo);
@@ -203,6 +202,42 @@ class Users extends Controller {
     // 设置凭证已使用
     await app.redis.set(`ticket-email:${ticket}`, 'isUsed');
     ctx.helper.$success(userInstance);
+  }
+
+  // 创建企业用户
+  async createCompanyUser() {
+    const { ctx } = this;
+    ctx.validate(
+      {
+        email: rule.email,
+        password: rule.password,
+      },
+      ctx.request.body
+    );
+    const { email, password } = ctx.request.body;
+
+    const userInfoInstance = await ctx.service.userInfos.findOne(ctx.user_email);
+    console.log(userInfoInstance.role);
+    console.log(typeof userInfoInstance.role);
+    console.log(userInfoInstance.role === 7);
+    // 只有企业管理员和超级管理员才能创建企业用户
+    if (userInfoInstance.role === 7 || userInfoInstance.role === 8) {
+      // 对密码进行hash处理
+      const pwdHash = ctx.helper.cryptPwd(password);
+      // 创建企业用户
+      const userInstance = await ctx.service.users.create({ email, password: pwdHash });
+      const userInfo = {
+        id: userInstance.id,
+        email: userInstance.email,
+        role: 4,
+      };
+      const companyUser = await ctx.service.userInfos.createOrUpdate(userInfo);
+      ctx.helper.$success(companyUser);
+      return;
+    }
+    // 非企业管理员和超级管理员都返回无权操作
+    const { NO_RIGHTS_OPERATION } = this.config.errors;
+    ctx.helper.$fail(NO_RIGHTS_OPERATION.code, NO_RIGHTS_OPERATION.msg);
   }
 }
 

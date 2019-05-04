@@ -56,7 +56,7 @@ class UserInfos extends Controller {
     if (
       (id && id !== userInfoInstance.id) ||
       (email && email !== userInfoInstance.email) ||
-      (role && role > 4) ||
+      (role && role > 3) ||
       certifyType
     ) {
       const { NO_RIGHTS_OPERATION } = this.config.errors;
@@ -82,14 +82,8 @@ class UserInfos extends Controller {
       ctx.helper.$fail(USER_NOT_FOUND.code, USER_NOT_FOUND.msg);
       return;
     }
-    if (certifyType === 2 && (userInfoInstance.role === 4 || userInfoInstance.role === 7)) {
-      // 只有运营管理员或者超级管理员才可以认证用户为普通认证用户
-      await needCertifyUser.update({ id, certifyType });
-      ctx.helper.$success(needCertifyUser);
-      return;
-    }
-    if (certifyType === 3 && (userInfoInstance.role === 5 || userInfoInstance.role === 7)) {
-      // 只有学校管理员或者超级管理员才可以认证用户为企业官方用户
+    if (userInfoInstance.role > 4) {
+      // 只有管理员才可以认证用户为认证用户
       await needCertifyUser.update({ id, certifyType });
       ctx.helper.$success(needCertifyUser);
       return;

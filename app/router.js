@@ -20,6 +20,7 @@ module.exports = app => {
   router.get('/api/loginStatus', auth_token_check, 'api.users.loginStatus'); // 获取登录状态
 
   // 用户信息相关
+  router.post('/api/createCompanyUser', auth_token_check, 'api.users.createCompanyUser'); // 创建企业用户
   router.get('/api/user/:id', 'api.userInfos.getUserInfoById'); // 获取用户信息通过ID
   router.get('/api/getUserInfo', auth_token_check, 'api.userInfos.getUserInfo'); // 获取用户信息通过auth_token
   router.get('/api/getAllStudents', auth_token_check, 'api.userInfos.getAllStudents'); // 获取所有学生信息
@@ -28,6 +29,7 @@ module.exports = app => {
     auth_token_check,
     'api.userInfos.getAllStudentsAtSchool'
   ); // 获取所有在校学生信息
+
   router.get('/api/getAllGraduates', auth_token_check, 'api.userInfos.getAllGraduates'); // 获取所有毕业学生信息
   router.post('/api/updateUserInfo', auth_token_check, 'api.userInfos.updateUserInfo'); // 更新用户信息
   router.post('/api/certifyUser', auth_token_check, 'api.userInfos.certifyUser'); // 认证用户

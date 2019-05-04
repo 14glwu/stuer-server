@@ -10,7 +10,8 @@ module.exports = app => {
       email: { type: STRING, comment: '邮箱账号' },
       role: {
         type: INTEGER,
-        comment: '用户角色ID，1毕业生，2在校生，3教师，4运营管理员，5学校管理员，6企业管理员，7超级管理员',
+        comment:
+          '用户角色ID，1毕业生，2在校生，3教师，4企业用户，5运营管理员，6学校管理员，7企业管理员，8超级管理员',
       },
       name: { type: STRING, comment: '用户真实姓名' },
       nickName: { type: STRING, comment: '用户昵称' },
@@ -24,7 +25,10 @@ module.exports = app => {
       eduLevel: { type: STRING(10), comment: '学历' },
       party: { type: STRING(10), comment: '政治面貌' },
       idCard: { type: STRING(30), comment: '证件号码' },
-      idCardType: { type: INTEGER, comment: '证件类型，1身份证，2护照，3港澳通行证，4台胞证，5军官证，6其他' },
+      idCardType: {
+        type: INTEGER,
+        comment: '证件类型，1身份证，2护照，3港澳通行证，4台胞证，5军官证，6其他',
+      },
       stuNum: { type: STRING(30), comment: '学号' },
       teaNum: { type: STRING(30), comment: '教师编号' },
       graduated: { type: INTEGER, comment: '是否毕业，1毕业，0在校' },
@@ -41,7 +45,11 @@ module.exports = app => {
       resume: { type: TEXT, comment: '个人简历' },
       certifyType: {
         type: INTEGER,
-        comment: '认证类型，1未认证用户，2运营认证的用户（某公司员工、某教师），3学校管理员认证的企业官方用户',
+        comment: '认证类型，针对学生用户而言，1认证用户，0未认证用户',
+      },
+      evaluate: {
+        type: INTEGER,
+        comment: '企业对毕业生的评价，程度为1-5，分别是非常差，差，合格，良好，优秀',
       },
       reverse1: STRING,
       reverse2: STRING(1000),
@@ -58,6 +66,6 @@ module.exports = app => {
   UserInfo.associate = function() {
     app.model.UserInfo.belongsTo(app.model.User, { as: 'info', foreignKey: 'id' });
   };
-  UserInfo.sync();
+  UserInfo.sync({ alter: true });
   return UserInfo;
 };

@@ -12,7 +12,7 @@ module.exports = app => {
       top: { type: INTEGER, comment: '是否置顶，1是，0否' },
       highlight: { type: INTEGER, comment: '是否精华帖，1是，0否' },
       tags: { type: STRING, comment: '帖子标签' },
-      type: { type: INTEGER, comment: '帖子类型，1讨论区，2树洞，3求职区' },
+      type: { type: INTEGER, comment: '帖子类型，1讨论区，2树洞，3找对象，4求职区' },
       reverse1: STRING,
       reverse2: STRING(1000),
       reverse3: STRING(30),

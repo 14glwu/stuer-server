@@ -20,6 +20,7 @@ module.exports = app => {
   router.get('/api/loginStatus', auth_token_check, 'api.users.loginStatus'); // 获取登录状态
 
   // 用户信息相关
+  router.post('/api/createAlumniUser', auth_token_check, 'api.users.createAlumniUser'); // 创建企业用户
   router.post('/api/createCompanyUser', auth_token_check, 'api.users.createCompanyUser'); // 创建企业用户
   router.get('/api/user/:id', 'api.userInfos.getUserInfoById'); // 获取用户信息通过ID
   router.get('/api/getUserInfo', auth_token_check, 'api.userInfos.getUserInfo'); // 获取用户信息通过auth_token

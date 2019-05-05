@@ -10,4 +10,5 @@ run/
 *.sw*
 *.un~
 upload/img/*
+upload/postImg/*
 !.gitkeep

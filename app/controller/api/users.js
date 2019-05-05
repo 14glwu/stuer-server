@@ -217,9 +217,6 @@ class Users extends Controller {
     const { email, password } = ctx.request.body;
 
     const userInfoInstance = await ctx.service.userInfos.findOne(ctx.user_email);
-    console.log(userInfoInstance.role);
-    console.log(typeof userInfoInstance.role);
-    console.log(userInfoInstance.role === 7);
     // 只有企业管理员和超级管理员才能创建企业用户
     if (userInfoInstance.role === 7 || userInfoInstance.role === 8) {
       // 对密码进行hash处理

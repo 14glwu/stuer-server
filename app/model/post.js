@@ -25,6 +25,6 @@ module.exports = app => {
       underscored: false,
     }
   );
-  Post.sync();
+  Post.sync({ alter: true });
   return Post;
 };

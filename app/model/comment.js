@@ -22,6 +22,6 @@ module.exports = app => {
       underscored: false,
     }
   );
-  Comment.sync();
+  Comment.sync({ alter: true });
   return Comment;
 };

@@ -27,6 +27,6 @@ module.exports = app => {
       underscored: false,
     }
   );
-  Message.sync();
+  Message.sync({ alter: true });
   return Message;
 };

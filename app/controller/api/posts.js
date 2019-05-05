@@ -92,9 +92,9 @@ class Posts extends Controller {
           type: 'string',
           required: false,
         },
-        type: {
-          type: 'enum',
-          values: [ 1, 2, 3, 4 ],
+        tags: {
+          type: 'string',
+          required: false,
         },
       },
       ctx.request.body

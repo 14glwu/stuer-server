@@ -39,4 +39,5 @@ module.exports = app => {
   router.resources('/api/posts', auth_token_check_not_get, 'api.posts'); // RESTFUL api风格 帖子相关接口
   router.post('/api/uploadImg', 'api.uploader.uploadImg'); // 上传单张图片
   router.post('/api/uploadImgs', 'api.uploader.uploadImgs'); // 上传多张图片
+  router.post('/api/uploadImgsForPost', 'api.uploader.uploadImgsForPost'); // 上传多张图片,供写帖子时上传图片
 };

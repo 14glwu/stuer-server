@@ -66,6 +66,14 @@ module.exports = {
       msg,
     };
   },
+  // 成功响应
+  $successForEditor(data = {}) {
+    const { ctx } = this;
+    ctx.body = {
+      errno: 0,
+      data,
+    };
+  },
   // 失败响应
   $fail(errCode = 400, msg = 'BAD REQUEST') {
     const { ctx } = this;

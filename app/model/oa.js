@@ -24,6 +24,6 @@ module.exports = app => {
       underscored: false,
     }
   );
-  Oa.sync();
+  Oa.sync({ alter: true });
   return Oa;
 };

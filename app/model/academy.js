@@ -21,6 +21,6 @@ module.exports = app => {
       underscored: false,
     }
   );
-  Academy.sync();
+  Academy.sync({ alter: true });
   return Academy;
 };

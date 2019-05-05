@@ -25,6 +25,6 @@ module.exports = app => {
       underscored: false,
     }
   );
-  Reply.sync();
+  Reply.sync({ alter: true });
   return Reply;
 };

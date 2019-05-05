@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["posts"],{"715d":function(t,n,s){"use strict";s.r(n);var e=function(){var t=this,n=t.$createElement,s=t._self._c||n;return s("div",[t._v("this is posts")])},o=[],c={data:function(){return{}},components:{}},i=c,r=s("2877"),u=Object(r["a"])(i,e,o,!1,null,"5dbf7db8",null);n["default"]=u.exports}}]);
+//# sourceMappingURL=posts.bce006dd.js.map

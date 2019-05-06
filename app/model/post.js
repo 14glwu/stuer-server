@@ -11,7 +11,16 @@ module.exports = app => {
       content: { type: TEXT, comment: '帖子内容' },
       top: { type: INTEGER, comment: '是否置顶，1是，0否' },
       highlight: { type: INTEGER, comment: '是否精华帖，1是，0否' },
-      tags: { type: STRING, comment: '帖子标签' },
+      tags: {
+        type: STRING,
+        comment: '帖子标签',
+        get() {
+          return JSON.parse(this.getDataValue('tags'));
+        },
+        set(val) {
+          this.setDataValue('tags', JSON.stringify(val));
+        },
+      },
       type: { type: INTEGER, comment: '帖子类型，1讨论区，2树洞，3找对象，4求职区' },
       reverse1: STRING,
       reverse2: STRING(1000),

@@ -2,15 +2,13 @@
 
 module.exports = app => {
   const { STRING, INTEGER, TEXT } = app.Sequelize;
-  const Like = app.model.define(
-    'like',
+  const UserSetting = app.model.define(
+    'user-setting',
     {
       id: { type: INTEGER, primaryKey: true, autoIncrement: true },
-      userId: { type: INTEGER, comment: '点赞者' },
-      postId: { type: INTEGER, comment: '帖子ID' },
-      commentId: { type: INTEGER, comment: '评论ID' },
-      replyId: { type: INTEGER, comment: '回复ID' },
-      type: { type: INTEGER, comment: '点赞类型，1点赞帖子、2点赞评论、3点赞回复' },
+      userId: { type: INTEGER, comment: '用户ID' },
+      settingId: { type: INTEGER, comment: '配置ID' },
+      value: { type: STRING, comment: '配置值' },
       reverse1: STRING,
       reverse2: STRING(1000),
       reverse3: STRING(30),
@@ -23,6 +21,9 @@ module.exports = app => {
       underscored: false,
     }
   );
-  Like.sync();
-  return Like;
+  UserSetting.associate = function() {
+    app.model.UserSetting.belongsTo(app.model.Setting);
+  };
+  UserSetting.sync();
+  return UserSetting;
 };

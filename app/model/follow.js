@@ -2,15 +2,13 @@
 
 module.exports = app => {
   const { STRING, INTEGER, TEXT } = app.Sequelize;
-  const Like = app.model.define(
-    'like',
+  const Follow = app.model.define(
+    'follow',
     {
       id: { type: INTEGER, primaryKey: true, autoIncrement: true },
-      userId: { type: INTEGER, comment: '点赞者' },
-      postId: { type: INTEGER, comment: '帖子ID' },
-      commentId: { type: INTEGER, comment: '评论ID' },
-      replyId: { type: INTEGER, comment: '回复ID' },
-      type: { type: INTEGER, comment: '点赞类型，1点赞帖子、2点赞评论、3点赞回复' },
+      userId: { type: INTEGER, comment: '用户id' },
+      followUserId: { type: INTEGER, comment: '被关注者用户id' },
+      status: { type: INTEGER, comment: '关注状态，1关注，0取关' },
       reverse1: STRING,
       reverse2: STRING(1000),
       reverse3: STRING(30),
@@ -23,6 +21,6 @@ module.exports = app => {
       underscored: false,
     }
   );
-  Like.sync();
-  return Like;
+  Follow.sync();
+  return Follow;
 };

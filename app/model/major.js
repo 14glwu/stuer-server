@@ -26,6 +26,6 @@ module.exports = app => {
     app.model.Major.belongsTo(app.model.Academy);
   };
 
-  Major.sync({ alter: true });
+  Major.sync();
   return Major;
 };

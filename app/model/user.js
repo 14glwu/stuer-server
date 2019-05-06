@@ -21,6 +21,6 @@ module.exports = app => {
       underscored: false,
     }
   );
-  User.sync({ alter: true });
+  User.sync();
   return User;
 };

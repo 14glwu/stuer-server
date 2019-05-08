@@ -150,6 +150,43 @@ class Posts extends Controller {
     ctx.helper.$success(post);
   }
 
+  // 审核帖子
+  async setPostChecked() {
+    const { ctx } = this;
+    ctx.validate(
+      {
+        id: {
+          type: 'int',
+          convertType: 'int',
+          required: true,
+        },
+        checked: {
+          type: 'enum',
+          convertType: 'int',
+          values: [ 1, 0 ],
+          required: true,
+        },
+      },
+      ctx.request.body
+    );
+    const { id, checked } = ctx.request.body;
+    const post = await ctx.service.posts.findById(id);
+    if (!post) {
+      const { POST_NOT_FOUND } = this.config.errors;
+      ctx.helper.$fail(POST_NOT_FOUND.code, POST_NOT_FOUND.msg);
+      return;
+    }
+    // 只有管理员有权进行此操作
+    const user = await ctx.service.userInfos.findOne(ctx.user_email);
+    if (user.role < 5) {
+      const { NO_RIGHTS_OPERATION } = this.config.errors;
+      ctx.helper.$fail(NO_RIGHTS_OPERATION.code, NO_RIGHTS_OPERATION.msg);
+      return;
+    }
+    await post.update({ checked });
+    ctx.helper.$success(post);
+  }
+
   // 删除帖子
   async destroy() {
     const { ctx } = this;

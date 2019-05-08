@@ -1,2 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["find-love"],{df82:function(n,e,t){"use strict";t.r(e);var i=function(){var n=this,e=n.$createElement,t=n._self._c||e;return t("div",[n._v("this is find-love")])},o=[],s={data:function(){return{}},components:{}},c=s,d=t("2877"),r=Object(d["a"])(c,i,o,!1,null,"45de1dbe",null);e["default"]=r.exports}}]);
-//# sourceMappingURL=find-love.601a0d77.js.map

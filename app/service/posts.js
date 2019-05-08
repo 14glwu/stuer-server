@@ -3,12 +3,10 @@
 const Service = require('egg').Service;
 
 class Posts extends Service {
-  async getLatestPost(pageIndex = 1, pageSize = 10, type = 1) {
+  async getLatestPost(pageIndex = 1, pageSize = 10, type = 1, checked = 0) {
     const { ctx } = this;
     // 先查询置顶帖子，置顶帖子的数量不允许超过一页
-    let { count: topCount, rows: topPosts } = await this.getTopPostAndCount({
-      type,
-    });
+    let { count: topCount, rows: topPosts } = await this.getTopPostAndCount(type, checked);
     if (pageSize < topCount) {
       const err = new Error();
       err.msg = '一页数据量需大于置顶帖子数';
@@ -25,8 +23,8 @@ class Posts extends Service {
       offset -= topCount;
       topPosts = []; // 第一页以后不需要展示置顶帖子
     }
-    const notTopPosts = await this.getNotTopPost({ limit, offset, type }); // 查询未置顶帖子
-    const count = await this.getPostCount(type); // 获取帖子总数
+    const notTopPosts = await this.getNotTopPost(limit, offset, type, checked); // 查询未置顶帖子
+    const count = await this.getPostCount(type, checked); // 获取帖子总数
     const posts = [].concat(topPosts, notTopPosts); // 将帖子数据汇总
     await Promise.all(
       posts.map(async post => {
@@ -36,12 +34,13 @@ class Posts extends Service {
     );
     return { count, posts };
   }
-  async getHighlightPost(pageIndex = 1, pageSize = 10, type = 1) {
+  async getHighlightPost(pageIndex = 1, pageSize = 10, type = 1, checked = 0) {
     const { ctx } = this;
     const query = {
       where: {
         type,
         highlight: 1,
+        checked,
       },
       order: [[ 'createdAt', 'DESC' ]],
       limit: pageSize,
@@ -59,22 +58,24 @@ class Posts extends Service {
   }
 
   // 获取帖子数量
-  async getPostCount(type) {
+  async getPostCount(type = 1, checked = 0) {
     const { ctx } = this;
     const count = await ctx.model.Post.count({
       where: {
         type,
+        checked,
       },
     });
     return count;
   }
   // 获取非置顶帖子
-  async getNotTopPost({ limit = 10, offset = 0, type = 1 }) {
+  async getNotTopPost(limit = 10, offset = 0, type = 1, checked = 0) {
     const { ctx } = this;
     const query = {
       where: {
         type,
         top: 0,
+        checked,
       },
       order: [[ 'createdAt', 'DESC' ]],
       limit,
@@ -84,19 +85,29 @@ class Posts extends Service {
     return notTopPost;
   }
   // 获取置顶帖子和数量
-  async getTopPostAndCount({ type = 1 }) {
+  async getTopPostAndCount(type = 1, checked = 0) {
     const { ctx } = this;
     const query = {
       where: {
         type,
         top: 1,
+        checked,
       },
       order: [[ 'createdAt', 'DESC' ]],
     };
     const topPost = await ctx.model.Post.findAndCountAll(query);
     return topPost;
   }
-  async create({ userId, title, content, top = 0, highlight = 0, type = 1, tags }) {
+  async create({
+    userId,
+    title = '',
+    content = '',
+    top = 0,
+    highlight = 0,
+    type = 1,
+    tags = [],
+    checked = 0,
+  }) {
     const { ctx } = this;
     const postRecord = await ctx.model.Post.create({
       userId,
@@ -106,6 +117,7 @@ class Posts extends Service {
       highlight,
       type,
       tags,
+      checked,
     });
     return postRecord;
   }

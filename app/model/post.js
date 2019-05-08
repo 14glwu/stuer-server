@@ -10,8 +10,8 @@ module.exports = app => {
       userId: { type: INTEGER, comment: '用户id' },
       title: { type: STRING, comment: '帖子标题' },
       content: { type: TEXT, comment: '帖子内容' },
-      top: { type: INTEGER, comment: '是否置顶，1是，0否' },
-      highlight: { type: INTEGER, comment: '是否精华帖，1是，0否' },
+      top: { type: INTEGER, defaultValue: 0, comment: '是否置顶，1是，0否' },
+      highlight: { type: INTEGER, defaultValue: 0, comment: '是否精华帖，1是，0否' },
       tags: {
         type: STRING,
         comment: '帖子标签',
@@ -22,7 +22,12 @@ module.exports = app => {
           this.setDataValue('tags', JSON.stringify(val));
         },
       },
-      type: { type: INTEGER, comment: '帖子类型，1讨论区，2树洞，3找对象，4求职区' },
+      type: {
+        type: INTEGER,
+        defaultValue: 1,
+        comment: '帖子类型，1讨论区，2树洞，3找对象，4求职区',
+      },
+      checked: { type: INTEGER, defaultValue: 0, comment: '帖子是否经过审核，1审核过，0未审核' },
       reverse1: STRING,
       reverse2: STRING(1000),
       reverse3: STRING(30),
@@ -54,6 +59,6 @@ module.exports = app => {
       underscored: false,
     }
   );
-  Post.sync();
+  Post.sync({ alter: true });
   return Post;
 };

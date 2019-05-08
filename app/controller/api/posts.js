@@ -40,13 +40,18 @@ class Posts extends Controller {
     ctx.validate(queryRule, ctx.query); // 参数校验
     const { pageIndex, pageSize, type, order } = ctx.query;
     let result = { count: 0, posts: [] };
+    let checked = 0;
+    if (type === 4) {
+      // 获取审核过的帖子，求职区的帖子需要经过审核才能展示
+      checked = 1;
+    }
     if (order === 1) {
       // 查询最新发表的帖子
-      result = await ctx.service.posts.getLatestPost(pageIndex, pageSize, type);
+      result = await ctx.service.posts.getLatestPost(pageIndex, pageSize, type, checked);
     } else if (order === 2) {
     } else if (order === 3) {
     } else {
-      result = await ctx.service.posts.getHighlightPost(pageIndex, pageSize, type);
+      result = await ctx.service.posts.getHighlightPost(pageIndex, pageSize, type, checked);
     }
     ctx.helper.$success(result);
   }
@@ -68,7 +73,7 @@ class Posts extends Controller {
       {
         title: {
           type: 'string',
-          required: true,
+          required: false,
           max: 40,
         },
         content: {
@@ -84,19 +89,15 @@ class Posts extends Controller {
         tags: {
           type: 'array',
           required: false,
+          default: [],
         },
       },
       ctx.request.body
     );
     const user = await ctx.service.userInfos.findOne(ctx.user_email);
-    const { title, content, type, tags } = ctx.request.body;
-    const post = await ctx.service.posts.create({
-      userId: user.id,
-      title,
-      content,
-      type,
-      tags,
-    });
+    const newPost = {};
+    Object.assign(newPost, ctx.request.body, { userId: user.id });
+    const post = await ctx.service.posts.create(newPost);
     ctx.helper.$success(post);
   }
 
@@ -123,6 +124,11 @@ class Posts extends Controller {
           type: 'array',
           required: false,
         },
+        checked: {
+          type: 'enum',
+          values: [ 1, 0 ],
+          required: false,
+        },
       },
       ctx.request.body
     );
@@ -140,8 +146,7 @@ class Posts extends Controller {
       ctx.helper.$fail(NO_RIGHTS_OPERATION.code, NO_RIGHTS_OPERATION.msg);
       return;
     }
-    const { title, content, type, tags } = ctx.request.body;
-    await post.update({ title, content, type, tags });
+    await post.update(ctx.request.body);
     ctx.helper.$success(post);
   }
 

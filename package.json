@@ -5,6 +5,7 @@
   "private": true,
   "dependencies": {
     "await-stream-ready": "^1.0.1",
+    "dayjs": "^1.8.13",
     "egg": "^2.2.1",
     "egg-scripts": "^2.5.0",
     "egg-sequelize": "^4.3.1",

@@ -56,7 +56,7 @@ class UserInfos extends Controller {
     if (
       (id && id !== userInfoInstance.id) ||
       (email && email !== userInfoInstance.email) ||
-      (role && role > 3) ||
+      (role && role > 4 && userInfoInstance.role < 5) ||
       certifyType
     ) {
       const { NO_RIGHTS_OPERATION } = this.config.errors;

@@ -23,6 +23,7 @@ module.exports = appInfo => {
     database: 'stuer',
     username: 'root',
     password: '1234',
+    timezone: '+8:00',
   };
 
   config.security = {

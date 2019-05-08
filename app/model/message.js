@@ -1,5 +1,5 @@
 'use strict';
-
+const dayjs = require('dayjs');
 module.exports = app => {
   const { STRING, INTEGER, TEXT, DATE } = app.Sequelize;
 
@@ -21,6 +21,25 @@ module.exports = app => {
       reverse4: INTEGER,
       reverse5: TEXT,
       reverse6: TEXT('tiny'),
+
+      createdAt: {
+        type: DATE,
+        get() {
+          return dayjs(this.getDataValue('createdAt')).valueOf();
+        },
+      },
+      updatedAt: {
+        type: DATE,
+        get() {
+          return dayjs(this.getDataValue('updatedAt')).valueOf();
+        },
+      },
+      deletedAt: {
+        type: DATE,
+        get() {
+          return dayjs(this.getDataValue('deletedAt')).valueOf();
+        },
+      },
     },
     {
       paranoid: true,

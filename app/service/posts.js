@@ -26,12 +26,12 @@ class Posts extends Service {
       topPosts = []; // 第一页以后不需要展示置顶帖子
     }
     const notTopPosts = await this.getNotTopPost({ limit, offset, type }); // 查询未置顶帖子
-    const count = await this.getPostCount(); // 获取帖子总数
+    const count = await this.getPostCount(type); // 获取帖子总数
     const posts = [].concat(topPosts, notTopPosts); // 将帖子数据汇总
     await Promise.all(
       posts.map(async post => {
-        const userInfo = await ctx.service.userInfos.findByIdInRaw(post.userId);
-        post.setDataValue('userInfo', userInfo); // 给每条帖子数据添加作者信息
+        const userInfo = await ctx.service.userInfos.findById(post.userId);
+        post.setDataValue('userInfo', userInfo.get({ plain: true })); // 给每条帖子数据添加作者信息
       })
     );
     return { count, posts };
@@ -51,17 +51,21 @@ class Posts extends Service {
     const { count: count, rows: posts } = result;
     await Promise.all(
       posts.map(async post => {
-        const userInfo = await ctx.service.userInfos.findByIdInRaw(post.userId);
-        post.setDataValue('userInfo', userInfo); // 给每条帖子数据添加作者信息
+        const userInfo = await ctx.service.userInfos.findById(post.userId);
+        post.setDataValue('userInfo', userInfo.get({ plain: true })); // 给每条帖子数据添加作者信息
       })
     );
     return { count, posts };
   }
 
   // 获取帖子数量
-  async getPostCount() {
+  async getPostCount(type) {
     const { ctx } = this;
-    const count = await ctx.model.Post.count();
+    const count = await ctx.model.Post.count({
+      where: {
+        type,
+      },
+    });
     return count;
   }
   // 获取非置顶帖子

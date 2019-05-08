@@ -1,5 +1,5 @@
 'use strict';
-
+const dayjs = require('dayjs');
 module.exports = app => {
   const { STRING, INTEGER, TEXT, DATE } = app.Sequelize;
 
@@ -20,7 +20,13 @@ module.exports = app => {
       age: { type: INTEGER, comment: '年龄' },
       gender: { type: INTEGER, comment: '性别' },
       phone: { type: STRING(20), comment: '联系方式' },
-      birthTime: { type: DATE, comment: '生日' },
+      birthTime: {
+        type: DATE,
+        comment: '生日',
+        get() {
+          return dayjs(this.getDataValue('birthTime')).valueOf();
+        },
+      },
       birthPlace: { type: STRING, comment: '籍贯' },
       eduLevel: { type: STRING(10), comment: '学历' },
       party: { type: STRING(10), comment: '政治面貌' },
@@ -57,6 +63,25 @@ module.exports = app => {
       reverse4: INTEGER,
       reverse5: TEXT,
       reverse6: TEXT('tiny'),
+
+      createdAt: {
+        type: DATE,
+        get() {
+          return dayjs(this.getDataValue('createdAt')).valueOf();
+        },
+      },
+      updatedAt: {
+        type: DATE,
+        get() {
+          return dayjs(this.getDataValue('updatedAt')).valueOf();
+        },
+      },
+      deletedAt: {
+        type: DATE,
+        get() {
+          return dayjs(this.getDataValue('deletedAt')).valueOf();
+        },
+      },
     },
     {
       paranoid: true,

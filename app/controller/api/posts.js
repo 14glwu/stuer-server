@@ -56,6 +56,8 @@ class Posts extends Controller {
     const { ctx } = this;
     const id = ctx.helper.toInt(ctx.params.id);
     const post = await ctx.service.posts.findById(id);
+    const userInfo = await ctx.service.userInfos.findById(post.userId);
+    post.setDataValue('userInfo', userInfo.get({ plain: true })); // 给每条帖子数据添加作者信息
     ctx.helper.$success(post);
   }
 
@@ -75,9 +77,11 @@ class Posts extends Controller {
         },
         type: {
           type: 'enum',
+          default: 1,
           values: [ 1, 2, 3, 4 ],
+          required: false,
         },
-        tag: {
+        tags: {
           type: 'array',
           required: false,
         },
@@ -110,8 +114,13 @@ class Posts extends Controller {
           type: 'string',
           required: false,
         },
+        type: {
+          type: 'enum',
+          values: [ 1, 2, 3, 4 ],
+          required: false,
+        },
         tags: {
-          type: 'string',
+          type: 'array',
           required: false,
         },
       },
@@ -131,7 +140,8 @@ class Posts extends Controller {
       ctx.helper.$fail(NO_RIGHTS_OPERATION.code, NO_RIGHTS_OPERATION.msg);
       return;
     }
-    await post.update(ctx.request.body);
+    const { title, content, type, tags } = ctx.request.body;
+    await post.update({ title, content, type, tags });
     ctx.helper.$success(post);
   }
 

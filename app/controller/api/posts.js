@@ -49,7 +49,11 @@ class Posts extends Controller {
       // 查询最新发表的帖子
       result = await ctx.service.posts.getLatestPost(pageIndex, pageSize, type, checked);
     } else if (order === 2) {
+      // 查询最新发表的帖子，暂时这样，还未完成
+      result = await ctx.service.posts.getLatestPost(pageIndex, pageSize, type, checked);
     } else if (order === 3) {
+      // 查询最新发表的帖子，暂时这样，还未完成
+      result = await ctx.service.posts.getLatestPost(pageIndex, pageSize, type, checked);
     } else {
       result = await ctx.service.posts.getHighlightPost(pageIndex, pageSize, type, checked);
     }

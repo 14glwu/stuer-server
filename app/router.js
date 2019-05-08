@@ -37,6 +37,8 @@ module.exports = app => {
 
   router.get('/api/getAllMajors', 'api.majors.getAllMajors'); // 获取所有学院专业
   router.resources('/api/companies', auth_token_check_not_get, 'api.companies'); // RESTFUL api风格  公司相关接口
+
+  // 帖子相关
   router.resources('/api/posts', auth_token_check_not_get, 'api.posts'); // RESTFUL api风格 帖子相关接口
   router.post('/api/setPostChecked', auth_token_check, 'api.posts.setPostChecked'); // 帖子审核接口
   router.post('/api/uploadImg', 'api.uploader.uploadImg'); // 上传单张图片

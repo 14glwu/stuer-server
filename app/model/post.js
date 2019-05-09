@@ -59,6 +59,6 @@ module.exports = app => {
       underscored: false,
     }
   );
-  Post.sync({ alter: true });
+  Post.sync();
   return Post;
 };

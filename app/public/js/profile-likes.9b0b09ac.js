@@ -1,2 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["profile-likes"],{"7df3":function(e,n,t){"use strict";t.r(n);var i=function(){var e=this,n=e.$createElement,t=e._self._c||n;return t("div",[e._v("这是likes")])},r=[],s={data:function(){return{}},methods:{}},l=s,o=t("2877"),u=Object(o["a"])(l,i,r,!1,null,"27b9bb48",null);n["default"]=u.exports}}]);
-//# sourceMappingURL=profile-likes.9b0b09ac.js.map
